@@ -2,14 +2,16 @@ import boto3
 import json 
 
 def lambda_handler(event, context):
+    print(event.get("question"))
+    question = event.get("question")
     client = boto3.client(service_name="bedrock-runtime")
 
     messages = [
-        {"role": "user", "content": [{"text": "What is automation?"}]},
+        {"role": "user", "content": [{"text": f"{question}"}]},
     ]
 
     guardrail_config = {
-        "guardrailIdentifier": "arn:aws:bedrock:us-east-2:340752832578:guardrail/ygjpsqisew0z",
+        "guardrailIdentifier": "arn:aws:bedrock:us-east-2:340752832578:guardrail/l1cl9nocuzrk",
         "guardrailVersion": "1",
         "trace": "enabled",
     }
